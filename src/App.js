@@ -77,8 +77,6 @@ class App extends Component {
               />
               {
                 range(this.state.segmentCount).map((num) => {
-                  console.log('num', num);
-                  console.log('rotation', (360 / this.state.segmentCount) * num);
                   return (
                     <Wedge
                       x={125}
