@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Stage, Layer, Circle, RegularPolygon, Wedge } from 'react-konva';
 import { range } from 'lodash';
+import 'rc-slider/assets/index.css';
+import Slider from 'rc-slider';
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
   state = {
-    segmentCount: 12,
+    segmentCount: 8,
     diameter: 10,
   }
 
@@ -25,15 +27,15 @@ class App extends Component {
     return Math.ceil(Math.PI * diameter * 1.1);
   }
 
-  handleSegmentChange = (event) => {
+  handleSegmentChange = (count) => {
     this.setState({
-      segmentCount: event.target.value,
+      segmentCount: count,
     });
   }
 
-  handleDiameterChange = (event) => {
+  handleDiameterChange = (diameter) => {
     this.setState({
-      diameter: event.target.value,
+      diameter: diameter,
     });
   }
 
@@ -41,71 +43,79 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <div className='Segmented'>
+
+            <Stage width={250} height={250}>
+              <Layer>
+                <RegularPolygon
+                  sides={this.state.segmentCount}
+                  x={125}
+                  y={125}
+                  radius={125}
+                  fill={'white'}
+                  stroke={'black'}
+                  strokeWidth={1}
+                />
+                {
+                  range(this.state.segmentCount).map((num) => {
+                    return (
+                      <Wedge
+                        x={125}
+                        y={125}
+                        radius={125}
+                        angle={360 / this.state.segmentCount}
+                        rotation={((360 / this.state.segmentCount) * num) - 90}
+                        stroke={'#222'}
+                        strokeWidth={2}
+                        opacity={1}
+                        key={num}
+                      />
+                    );
+                  })
+                }
+                <RegularPolygon
+                  sides={this.state.segmentCount}
+                  x={125}
+                  y={125}
+                  radius={100}
+                  fill={'#222'}
+                  stroke={'black'}
+                  strokeWidth={1}
+                />
+              </Layer>
+
+            </Stage>
+          </div>
           <h1 className="App-title">Segment</h1>
         </header>
         <p className="App-intro">
           Segment Count: {this.state.segmentCount}
         </p>
         <p className="App-intro">
-          Segment Degrees: {this.degrees()}
+          Segment Degrees: {`${this.degrees()}°`}
         </p>
         <p className="App-intro">
-          Diameter: {this.state.diameter}
+          Diameter: {`${this.state.diameter}"`}
         </p>
         <p className="App-intro">
-          Segment Length: {this.segmentLength()}
+          Segment Length: {`${this.segmentLength()}"`}
         </p>
         <p className="App-intro">
-          Board Length: {this.boardLength()}
+          Board Length: {`${this.boardLength()}"`}
         </p>
-        <input type='text' value={this.state.segmentCount} placeholder='segments' onChange={this.handleSegmentChange} />
-        <input type='text' value={this.state.diameter} placeholder='diameter' onChange={this.handleDiameterChange} />
+        <div className='sliders'>
 
-        <div className='Segmented'>
-
-          <Stage width={250} height={250}>
-            <Layer>
-              <RegularPolygon
-                sides={this.state.segmentCount}
-                x={125}
-                y={125}
-                radius={125}
-                fill={'papayawhip'}
-                stroke={'black'}
-                strokeWidth={1}
-              />
-              {
-                range(this.state.segmentCount).map((num) => {
-                  return (
-                    <Wedge
-                      x={125}
-                      y={125}
-                      radius={125}
-                      angle={360 / this.state.segmentCount}
-                      rotation={((360 / this.state.segmentCount) * num) - 90}
-                      fill={'papayawhip'}
-                      stroke={'black'}
-                      strokeWidth={1}
-                      opacity={0.2}
-                      key={num}
-                    />
-                  );
-                })
-              }
-              <RegularPolygon
-                sides={this.state.segmentCount}
-                x={125}
-                y={125}
-                radius={100}
-                fill={'white'}
-                stroke={'black'}
-                strokeWidth={1}
-              />
-            </Layer>
-
-          </Stage>
+          <div className="left-slider">
+            <p>{`Number of Segments: ${this.state.segmentCount}`}</p>
+            <Slider step={1} defaultValue={6} min={4} max={50} onChange={this.handleSegmentChange} />
+          </div>
+          <div className="right-slider">
+            <p>{`Diameter: ${this.state.diameter}"`}</p>
+            <Slider step={1} defaultValue={6} min={4} max={50} onChange={this.handleDiameterChange} />
+          </div>
         </div>
+
+
       </div >
     );
   }

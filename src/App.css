@@ -9,7 +9,7 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
+  height: 350px;
   padding: 20px;
   color: white;
 }
@@ -35,4 +35,21 @@ div.Segmented div {
   to {
     transform: rotate(360deg);
   }
+}
+
+div.sliders {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+div.left-slider {
+  margin-left: 25%;
+  width: 20%;
+}
+
+div.right-slider {
+  margin-right: 25%;
+  width: 20%;
 }
