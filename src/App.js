@@ -86,7 +86,7 @@ class App extends Component {
 
             </Stage>
           </div>
-          <h1 className="App-title">Segment</h1>
+          <h1 className="App-title">Segmented</h1>
         </header>
         <p className="App-intro">
           Segment Count: {this.state.segmentCount}
