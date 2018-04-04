@@ -9,7 +9,7 @@ import './App.css';
 class App extends Component {
   state = {
     segmentCount: 8,
-    diameter: 10,
+    diameter: 10.25,
   }
 
   degrees = () => {
@@ -111,7 +111,7 @@ class App extends Component {
           </div>
           <div className="right-slider">
             <p>{`Diameter: ${this.state.diameter}"`}</p>
-            <Slider step={0.25} defaultValue={6} min={4} max={50} onChange={this.handleDiameterChange} />
+            <Slider step={0.25} defaultValue={10.25} min={4} max={50} onChange={this.handleDiameterChange} />
           </div>
         </div>
 
