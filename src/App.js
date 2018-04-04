@@ -111,7 +111,7 @@ class App extends Component {
           </div>
           <div className="right-slider">
             <p>{`Diameter: ${this.state.diameter}"`}</p>
-            <Slider step={1} defaultValue={6} min={4} max={50} onChange={this.handleDiameterChange} />
+            <Slider step={0.25} defaultValue={6} min={4} max={50} onChange={this.handleDiameterChange} />
           </div>
         </div>
 
